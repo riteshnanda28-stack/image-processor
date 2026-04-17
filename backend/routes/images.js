@@ -25,11 +25,7 @@ const upload = multer({
 
 // Initialize Bull queue for image processing
 const imageProcessingQueue = new Queue('image-processing', {
-    redis: {
-          host: process.env.REDIS_HOST || 'localhost',
-          port: process.env.REDIS_PORT || 6379,
-          password: process.env.REDIS_PASSWORD
-    }
+redis: process.env.REDIS_URL || 'redis://localhost:6379'
 });
 
 // POST - Upload and queue image for processing
