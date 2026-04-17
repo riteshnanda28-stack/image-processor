@@ -43,6 +43,18 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/images', imagesRoutes);
 
+// GET - Get all jobs for a user (alias for /api/images/user/:userId)
+app.get('/api/jobs/:userId', async (req, res) => {
+      try {
+              const Image = require('./models/image');
+              const images = await Image.find({ userId: req.params.userId });
+              res.json({ jobs: images });
+      } catch (error) {
+              console.error('List jobs error:', error);
+              res.status(500).json({ error: error.message });
+      }
+});
+
                                         // Error handling middleware
                                         app.use((err, req, res, next) => {
                                           console.error(err.stack);
