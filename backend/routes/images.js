@@ -182,4 +182,15 @@ router.delete('/:imageId', authenticateToken, async (req, res) => {
     }
 });
 
+// GET - Get all images/jobs for a user
+router.get('/user/:userId', authenticateToken, async (req, res) => {
+      try {
+              const images = await Image.find({ userId: req.params.userId });
+              res.json({ jobs: images });
+      } catch (error) {
+              console.error('List images error:', error);
+              res.status(500).json({ error: error.message });
+      }
+});
+
 module.exports = router;
