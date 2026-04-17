@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
+const imagesRoutes = require('./routes/images');
 const mongoose = require('mongoose');
 
 dotenv.config();
@@ -40,6 +41,7 @@ app.get('/health', (req, res) => {
                                         });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/images', imagesRoutes);
 
                                         // Error handling middleware
                                         app.use((err, req, res, next) => {
